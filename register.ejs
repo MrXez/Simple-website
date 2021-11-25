@@ -1,0 +1,82 @@
+<html>
+<head>
+  <link rel="icon" href="./files/favicon/1.png" width="16px" height="16px">
+  <title>Register</title>
+  <script src="server.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+</head>
+<div class="topnav">
+  <div class="left-top-nav">
+    <a href="index.html">Index</a>
+    <a href="page1.html">Page 1</a>
+    <a href="page2.html">Page 2</a>
+    <a href="page3.html">Page 3</a>
+    <a href="page4.html">Page 4</a>
+    <a href="page5.html">Page 5</a>
+    <a href="page6.html">Page 6</a>
+    <a href="page7.html">Page 7</a>
+  </div>
+  <div class="right-top-nav">
+    <div class="dropdown">
+      <button class="dropbtn">Account
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="login.ejs">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+<body>
+  <div class="hero">
+    <div class="form-box">
+      <div class="social-icons">
+        <img src="../files/images/icons/circle_star.png">
+        <img src="../files/images/icons/circle.png">
+        <img src="../files/images/icons/pentagram.png">
+      </div>
+      <form method="post" action="/register" id="register" class="input-group">
+        <input type="text" class="input-field" id="username" placeholder="Enter Username" required>
+        <input type="email" class="input-field" id="useremail" placeholder="Enter Email" required>
+        <input type="password" class="input-field" id="password" placeholder="Enter Password" required>
+        <input type="password" class="input-field" id="confirmpassword" placeholder="Confirm Password" required>
+        <input type="checkbox" class="chech-box"><span>I agree to the <a href="../miscfiles/tos.html">terms and
+            conditions</a></span>
+        <script type="text/javascript">
+          function matchpass() {
+            password1 = document.getElementById("password").value;
+            password2 = document.getElementById("confirmpassword").value;
+            if (password1 == password2) {
+              return true;
+              alert("test");
+            } else {
+              alert("The passwords must be the same");
+              return false;
+            }
+          }
+        </script>
+        <input type="submit" value="Submit" class="submit-btn" name="reg_user" onsubmit="return matchpass()">
+        <script>
+          var mysql = require('mysql');
+          var con = mysql.createConnection({
+            host: "localhost",
+            user: "yourusername",
+            password: "yourpassword",
+            database: "accountdatabase"
+          });
+          con.connect(function (err) {
+            if (err) throw err;
+            con.query(userid, useremail, confirmpassword, function (err, result) {
+              if (err) throw err;
+            });
+          });
+        </script>
+        <div class="linespace">
+          <p>Already a member?<a href="login.ejs">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
